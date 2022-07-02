@@ -44,24 +44,23 @@ export default function TextFrom(props) {
     return (
         <>
             <div className='container ' >
-            <hr />
                 <div className="my-4 ">
                     <h3>{props.title}</h3>
                     <label htmlFor="myBox" className="form-label">Enter Your Text Below</label>
-                    <textarea className="form-control" onChange={onChangeF} value={text} style={{backgroundColor:props.mode==='light'?"white":"grey",color:props.mode==='light'?"black":"white"}} id="myBox" rows="3"></textarea>
-                    <button className='btn btn-outline-primary my-4 ' onClick={changeUpText}>Convert to UpperCase</button>
-                    <button className='btn btn-outline-success my-4 mx-3' onClick={changeLoText}>Convert to LowerCase</button>
-                    <button className='btn btn-outline-danger my-4 mx-3' onClick={clearText}>ClearText</button>
-                    <button className='btn btn-outline-warning my-4 mx-3' onClick={copyText}>Copy To clipBoard</button>
-                    <button className='btn btn-outline-secondary my-4 mx-3' onClick={removeExtraSpaces}>Remove Extra Spaces</button>
+                    <textarea className="form-control" onChange={onChangeF} value={text} style={{backgroundColor:props.mode==='light'?"white":"#33383e",color:props.mode==='light'?"black":"white"}} id="myBox" rows="3"></textarea>
+                    <button disabled={text.length===0} className='btn btn-outline-primary my-4 ' onClick={changeUpText}>Convert to UpperCase</button>
+                    <button disabled={text.length===0} className='btn btn-outline-success my-4 mx-3' onClick={changeLoText}>Convert to LowerCase</button>
+                    <button disabled={text.length===0} className='btn btn-outline-danger my-4 mx-3' onClick={clearText}>ClearText</button>
+                    <button disabled={text.length===0} className='btn btn-outline-warning my-4 mx-3' onClick={copyText}>Copy To clipBoard</button>
+                    <button disabled={text.length===0} className='btn btn-outline-secondary my-4 mx-3' onClick={removeExtraSpaces}>Remove Extra Spaces</button>
                 </div>
             </div>
             <div className='container'>
                 <h3 className="heading">Your Text Summary</h3>
-                <p className="description">You have <b>{text.split(" ").length}</b> Words and <b>{text.length}</b> Letters</p>
-                <p>It takes about <b>{(text.split(" ").length * 0.008 * 60).toFixed(2)}</b> Seconds or <b>{(text.split(" ").length * 0.008).toFixed(2)}</b>Minutes  to read the particular Text</p>
+                <p className="description">You have <b>{text.split(" ").filter((element)=>{return element.length!==0}).length}</b> Words and <b>{text.length}</b> Letters</p>
+                <p>It takes about <b>{(text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008 * 60).toFixed(2)}</b> Seconds or <b>{(text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008).toFixed(2)}</b>Minutes  to read the particular Text</p>
                 <h3>Preview :→</h3>
-                <p>{text.length>0?text:"Enter text in the TextBox to Preiview it here"}</p>
+                <p>{text.length>0?text:"Nothing to Preview"}</p>
             </div>
         </>
     )
